@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Happy Roach on a Beach</title>
+        <style>
+            .roach{
+                position: absolute;
+                top: 60px;
+            }
+            .roach img{
+                width: 600px;
+                height: 800px;
+            }
+            body{
+                background-size: cover;
+            }
+            body audio{
+                position: fixed;
+                top: 30px;
+                left: 30px;
+            }
+        </style>
+        <script
+        src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+        crossorigin="anonymous"></script>
+        <script>
+            var images = ["roach01.png","roach02.png","roach03.png"];
+            var number = 0;
+            var ascent = true;
+
+            var moveLegs = function(){
+                $(".roach").find("img").attr("src",images[number]);
+
+                if(number == 0){
+                    ascent = true;
+                }else if(number == 2){
+                    ascent = false;
+                }
+
+                if(ascent){
+                    number++;
+                }else{
+                    number--;
+                }
+            }
+
+            var rotate = function(degree){
+                $(".roach").css("transform","rotate("+degree+"deg)");
+            }
+            $(document).keydown(function(event){
+
+                moveLegs();
+
+                switch(event.which){
+                    case 37:
+                        rotate(-90)
+                        $(".roach").finish().animate({
+                            left: "-=100"
+                        });
+                        break;
+                    case 38:
+                        rotate(0)
+                        $(".roach").finish().animate({
+                            top: "-=100"
+                        });
+                        break;
+                    case 39:
+                        rotate(90)
+                        $(".roach").finish().animate({
+                            left: "+=100"
+                        });
+                        break;
+                    case 40:
+                        rotate(180)
+                        $(".roach").finish().animate({
+                            top: "+=100"
+                        });
+                        break;
+                };
+            });
+        </script>
+    </head>
+    <body background="beach01.jpg">
+        <audio controls>
+            <source src="Caipirinha in Hawaii - Carmen María and Edu Espinal.mp3" type="audio/mpeg">
+        </audio>
+        <div class="roach">
+            <img src="roach02.png">              
+        </div>
+    </body>
+</html>
